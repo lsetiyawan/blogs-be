@@ -44,7 +44,11 @@ class UserController {
         { expiresIn: "1d" }
       );
 
-      return res.json({ accessToken: token });
+      return res.json({
+        accessToken: token,
+        id: existUser.id,
+        email: existUser.email,
+      });
     } else {
       return res.status(400).send("Login failed");
     }
