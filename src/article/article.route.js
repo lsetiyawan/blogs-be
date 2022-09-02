@@ -14,11 +14,11 @@ const articleRoute = Router();
  *      - posts
  *    summary: API untuk mendapatkan seluruh post
  *    parameters:
- *      in: query
- *      name: writer
- *      schema:
- *        type: integer
- *      description: Numeric ID of the writer
+ *      - in: query
+ *        name: writer
+ *        schema:
+ *          type: integer
+ *        description: Numeric ID of the writer
  *    responses:
  *      '200':
  *        content:
@@ -36,11 +36,11 @@ articleRoute.get("/posts", articleController.getAllArticles);
  *      - posts
  *    summary: API untuk mendapatkan seluruh post
  *    parameters:
- *      in: path
- *      name: postId
- *      schema:
- *        type: integer
- *      description: Numeric ID of the writer
+ *      - name: postId
+ *        in: path
+ *        schema: 
+ *          type: integer
+ *        description: Numeric ID of the writer
  *    responses:
  *      '200':
  *        content:
@@ -89,6 +89,45 @@ articleRoute.post(
   validate,
   articleController.createArticle
 );
+
+/**
+ * @swagger
+ * /posts/{postId}:
+ *  put:
+ *    security:
+ *      - bearerAuth : []
+ *    tags:
+ *      - posts
+ *    summary: API untuk update post
+ *    parameters:
+ *      - name: postId
+ *        in: path
+ *        schema: 
+ *          type: integer
+ *        description: Numeric ID of the writer
+ *    requestBody:
+ *      required: true
+ *      content:
+ *        application/json:
+ *          schema:
+ *            type: object
+ *            properties:
+ *              title:
+ *                type: string
+ *                example: Judulnya
+ *              image:
+ *                type: url
+ *                example: http://www.goog.com/gambar.jpg
+ *              body:
+ *                type: string
+ *                example: inibodynya
+ *    responses:
+ *      '200':
+ *        content:
+ *          application/json:
+ *            schema:
+ *              type: object
+ */
 articleRoute.put(
   "/posts/:postId",
   tokenVerification,
