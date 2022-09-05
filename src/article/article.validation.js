@@ -18,6 +18,7 @@ const articleValidationObject = {
 const articleQuery = {
   writer: {
     in: ["query"],
+    optional: true,
     isInt: true,
     toInt: true,
   },
