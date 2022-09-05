@@ -6,7 +6,10 @@ const config = require("../config/config.json");
 class UserController {
   createUser = async (req, res) => {
     const { name, email, password } = req.body;
-
+    const existUser = await User.findOne({ where: { email }, raw: true });
+    if(existUser){
+      return res.status(400).json({message: "Email has been registered"})
+    }
     try {
       const hashedPassword = await bcrypt.hash(password, 10);
       const saveUser = await User.create({
