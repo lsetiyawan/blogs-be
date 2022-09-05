@@ -8,10 +8,14 @@ class ArticleController {
     if (writer) {
       query.user_id = { [Op.eq]: writer };
     }
-    const allArticles = await Article.findAll({
-      where: query,
-    });
-    return res.status(200).json(allArticles);
+    try {
+      const allArticles = await Article.findAll({
+        where: query,
+      });
+      return res.status(200).json(allArticles);
+    } catch (error) {
+      return res.status(500).json({ message: "Failed fetch posts" });
+    }
   };
 
   getSingleArticle = async (req, res) => {

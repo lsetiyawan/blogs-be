@@ -15,6 +15,15 @@ const articleValidationObject = {
   },
 };
 
+const articleQuery = {
+  writer: {
+    in: ["query"],
+    isInt: true,
+    toInt: true,
+  },
+};
+
 module.exports = {
   articleValidationObject,
+  articleQuery,
 };
